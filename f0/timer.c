@@ -1,36 +1,36 @@
 #include "cmsis/platform/stm32f0xx.h"
 #include "timer.h"
 
-void timer_init(TIM_TypeDef* timer, uint32_t period, uint16_t prescaler, TIMClockDivision_TypeDef clockDivision, TIMCounterMode_TypeDef counterMode, uint8_t repetitionCounter) {
-  uint16_t cr1 = timer->CR1;
+void $timer_init(TIMInitType init) {
+  uint16_t cr1 = init.timer->CR1;
   
-  if(timer == TIM1 || timer == TIM2 || timer == TIM3) {
+  if(init.timer == TIM1 || init.timer == TIM2 || init.timer == TIM3) {
     cr1 &= ~(TIM_CR1_DIR | TIM_CR1_CMS);
-    cr1 |= counterMode;
+    cr1 |= init.counterMode;
   }
 
-  if(timer != TIM6) {
+  if(init.timer != TIM6) {
     cr1 &= ~TIM_CR1_CKD;
-    cr1 |= clockDivision;
+    cr1 |= init.clockDivision;
   }
 
-  timer->CR1 = cr1;
-  timer->ARR = period;
-  timer->PSC = prescaler;
+  init.timer->CR1 = cr1;
+  init.timer->ARR = init.period;
+  init.timer->PSC = init.prescaler;
 
-  if(timer == TIM1 || timer == TIM15 || timer == TIM16 || timer == TIM17) {
-    timer->RCR = repetitionCounter;
+  if(init.timer == TIM1 || init.timer == TIM15 || init.timer == TIM16 || init.timer == TIM17) {
+    init.timer->RCR = init.repetitionCounter;
   }
 
-  timer->EGR = 1; // Generate update event
+  init.timer->EGR = 1; // Generate update event
 }
 
-void timer_set_interrupt_status(TIM_TypeDef* timer, uint16_t interrupt, FunctionalState status) {
+void $timer_set_interrupt_status(TIM_TypeDef* timer, uint16_t interrupt, FunctionalState status) {
   if(status == ENABLE) timer->DIER |= interrupt;
   else timer->DIER &= ~interrupt;
 }
 
-void timer_set_status(TIM_TypeDef* timer, FunctionalState status) {
+void $timer_set_status(TIM_TypeDef* timer, FunctionalState status) {
   if(status == ENABLE) timer->CR1 |= TIM_CR1_CEN;
   else timer->CR1 &= ~TIM_CR1_CEN;
 }

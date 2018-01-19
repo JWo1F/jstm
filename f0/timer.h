@@ -21,6 +21,15 @@ typedef enum {
   TIM_CounterMode_CenterAligned3 = 0x0060
 } TIMCounterMode_TypeDef;
 
-void timer_init(TIM_TypeDef* timer, uint32_t period, uint16_t prescaler, TIMClockDivision_TypeDef clockDivision, TIMCounterMode_TypeDef counterMode, uint8_t repetitionCounter);
-void timer_set_interrupt_status(TIM_TypeDef* timer, uint16_t interrupt, FunctionalState status);
-void timer_set_status(TIM_TypeDef* timer, FunctionalState status);
+typedef struct {
+  TIM_TypeDef* timer;
+  uint32_t period;
+  uint16_t prescaler;
+  TIMClockDivision_TypeDef clockDivision; // Only if timer != TIM6
+  TIMCounterMode_TypeDef counterMode; // Only if timer == TIM1||TIM2||TIM3
+  uint8_t repetitionCounter; // Only if timer == TIM1||TIM15||TIM16||TIM17
+} TIMInitType;
+
+void $timer_init(TIMInitType);
+void $timer_set_interrupt_status(TIM_TypeDef* timer, uint16_t interrupt, FunctionalState status);
+void $timer_set_status(TIM_TypeDef* timer, FunctionalState status);

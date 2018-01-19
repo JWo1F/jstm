@@ -75,11 +75,21 @@ typedef enum {
   ADC_SampleTime_239_5Cycles
 } ADCSampleTime_TypeDef;
 
-void adc_init(ADC_TypeDef* adc, ADCResolution_TypeDef resolution, FunctionalState continuousConvMode, ADCExternalTrigConvEdge_TypeDef externalTrigConvEdge, ADCExternalTrigConv_TypeDef externalTrigConv, ADCDataAlign_TypeDef dataAlign, ADCScanDirection_TypeDef scanDirection);
-void adc_start_conversion(ADC_TypeDef* adc);
-uint32_t adc_get_conversion_value(ADC_TypeDef* adc);
-void adc_channel_config(ADC_TypeDef* adc, ADCChannel_TypeDef channel);
-void adc_set_sample_time(ADC_TypeDef* adc, ADCSampleTime_TypeDef sampleTime);
-void adc_calibration(ADC_TypeDef* adc);
-void adc_enable(ADC_TypeDef* adc);
-void adc_disable(ADC_TypeDef* adc);
+typedef struct {
+  ADC_TypeDef* adc;
+  ADCResolution_TypeDef resolution;
+  FunctionalState continuousConvMode;
+  ADCExternalTrigConvEdge_TypeDef externalTrigConvEdge;
+  ADCExternalTrigConv_TypeDef externalTrigConv;
+  ADCDataAlign_TypeDef dataAlign;
+  ADCScanDirection_TypeDef scanDirection;
+} ADCInitType;
+
+void $adc_init(ADCInitType);
+void $adc_start_conversion(ADC_TypeDef* adc);
+uint32_t $adc_get_conversion_value(ADC_TypeDef* adc);
+void $adc_channel_config(ADC_TypeDef* adc, ADCChannel_TypeDef channel);
+void $adc_set_sample_time(ADC_TypeDef* adc, ADCSampleTime_TypeDef sampleTime);
+void $adc_calibration(ADC_TypeDef* adc);
+void $adc_enable(ADC_TypeDef* adc);
+void $adc_disable(ADC_TypeDef* adc);

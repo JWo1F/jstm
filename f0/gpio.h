@@ -31,14 +31,15 @@ typedef enum {
   GPIO_PuPd_DOWN   = 0x02
 } GPIOPuPd_TypeDef;
 
-void gpio_init_pin(
-  GPIO_TypeDef* port,
-  uint32_t pin,
-  GPIOMode_TypeDef mode,
-  GPIOPuPd_TypeDef PuPd,
-  GPIOSpeed_TypeDef speed,
-  GPIOOType_TypeDef oType
-);
+typedef struct {
+  GPIO_TypeDef* port;
+  uint32_t pin;
+  GPIOMode_TypeDef mode;
+  GPIOPuPd_TypeDef PuPd;
+  GPIOSpeed_TypeDef speed; // Only if mode == OUT||AF
+  GPIOOType_TypeDef oType; // Only if mode == OUT||AF
+} GPIOInitType;
 
-void gpio_set_pin(GPIO_TypeDef* port, uint32_t pin, FunctionalState status);
-void gpio_toggle_pin(GPIO_TypeDef* port, uint32_t pin);
+void $gpio_init_pin(GPIOInitType);
+void $gpio_set_pin(GPIO_TypeDef* port, uint32_t pin, FunctionalState status);
+void $gpio_toggle_pin(GPIO_TypeDef* port, uint32_t pin);
