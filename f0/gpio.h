@@ -40,6 +40,6 @@ typedef struct {
   GPIOOType_TypeDef oType; // Only if mode == OUT||AF
 } GPIOInitType;
 
-void $gpio_init_pin(GPIOInitType);
-void $gpio_set_pin(GPIO_TypeDef* port, uint32_t pin, FunctionalState status);
-void $gpio_toggle_pin(GPIO_TypeDef* port, uint32_t pin);
+void gpio_init_pin(GPIOInitType);
+void gpio_set_pin(GPIO_TypeDef* port, uint32_t pin, FunctionalState status);
+void gpio_toggle_pin(GPIO_TypeDef* port, uint32_t pin);

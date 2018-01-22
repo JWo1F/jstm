@@ -85,11 +85,11 @@ typedef struct {
   ADCScanDirection_TypeDef scanDirection;
 } ADCInitType;
 
-void $adc_init(ADCInitType);
-void $adc_start_conversion(ADC_TypeDef* adc);
-uint32_t $adc_get_conversion_value(ADC_TypeDef* adc);
-void $adc_channel_config(ADC_TypeDef* adc, ADCChannel_TypeDef channel);
-void $adc_set_sample_time(ADC_TypeDef* adc, ADCSampleTime_TypeDef sampleTime);
-void $adc_calibration(ADC_TypeDef* adc);
-void $adc_enable(ADC_TypeDef* adc);
-void $adc_disable(ADC_TypeDef* adc);
+void adc_init(ADCInitType);
+void adc_start_conversion(ADC_TypeDef* adc);
+uint32_t adc_get_conversion_value(ADC_TypeDef* adc);
+void adc_channel_config(ADC_TypeDef* adc, ADCChannel_TypeDef channel);
+void adc_set_sample_time(ADC_TypeDef* adc, ADCSampleTime_TypeDef sampleTime);
+void adc_calibration(ADC_TypeDef* adc);
+void adc_enable(ADC_TypeDef* adc);
+void adc_disable(ADC_TypeDef* adc);

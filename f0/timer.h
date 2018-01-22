@@ -30,6 +30,6 @@ typedef struct {
   uint8_t repetitionCounter; // Only if timer == TIM1||TIM15||TIM16||TIM17
 } TIMInitType;
 
-void $timer_init(TIMInitType);
-void $timer_set_interrupt_status(TIM_TypeDef* timer, uint16_t interrupt, FunctionalState status);
-void $timer_set_status(TIM_TypeDef* timer, FunctionalState status);
+void timer_init(TIMInitType);
+void timer_set_interrupt_status(TIM_TypeDef* timer, uint16_t interrupt, FunctionalState status);
+void timer_set_status(TIM_TypeDef* timer, FunctionalState status);

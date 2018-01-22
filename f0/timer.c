@@ -1,7 +1,7 @@
 #include "cmsis/platform/stm32f0xx.h"
 #include "timer.h"
 
-void $timer_init(TIMInitType init) {
+void timer_init(TIMInitType init) {
   uint16_t cr1 = init.timer->CR1;
   
   if(init.timer == TIM1 || init.timer == TIM2 || init.timer == TIM3) {
@@ -22,15 +22,15 @@ void $timer_init(TIMInitType init) {
     init.timer->RCR = init.repetitionCounter;
   }
 
-  init.timer->EGR = 1; // Generate update event
+  TIM16->EGR |= TIM_EGR_UG; // Disable auto-update inerrupt
 }
 
-void $timer_set_interrupt_status(TIM_TypeDef* timer, uint16_t interrupt, FunctionalState status) {
+void timer_set_interrupt_status(TIM_TypeDef* timer, uint16_t interrupt, FunctionalState status) {
   if(status == ENABLE) timer->DIER |= interrupt;
   else timer->DIER &= ~interrupt;
 }
 
-void $timer_set_status(TIM_TypeDef* timer, FunctionalState status) {
+void timer_set_status(TIM_TypeDef* timer, FunctionalState status) {
   if(status == ENABLE) timer->CR1 |= TIM_CR1_CEN;
   else timer->CR1 &= ~TIM_CR1_CEN;
 }
